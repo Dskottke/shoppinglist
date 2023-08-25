@@ -1,18 +1,25 @@
 package com.example.backend;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/ingredients")
 @RequiredArgsConstructor
 public class IngredientsController {
     private final IngredientService ingredientService;
+
+    @GetMapping()
+    public List<Ingredient> getAllIngredients() {
+            return ingredientService.getAllIngredients();
+    }
+
     @PostMapping()
-    public Ingredient addIngredient(@RequestBody IngredientWithoutId ingredientToAdd){
-    return ingredientService.addIngredient(ingredientToAdd);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Ingredient addIngredient(@RequestBody IngredientWithoutId ingredientToAdd) {
+        return ingredientService.addIngredient(ingredientToAdd);
     }
 }

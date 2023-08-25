@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="shadow-sm" style="margin: 2rem">
+      <h5 *ngIf="shoppingList.length < 1">Leere Liste</h5>
     <ul
       class="list-group ingredient-group">
       <li *ngFor="let i of shoppingList"

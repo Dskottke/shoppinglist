@@ -14,9 +14,10 @@ export class AddIngredientComponent{
   }
   onFormSubmit(){
   const ingredientToAdd = this.form.form.value as Ingredient
-  this.ingredientApiService.addIngredient(ingredientToAdd)
+  this.ingredientApiService.addIngredient(ingredientToAdd);
+  this.form.resetForm();
   }
   onFormReset(){
-  this.form.resetForm()
+  this.form.resetForm();
   }
 }
