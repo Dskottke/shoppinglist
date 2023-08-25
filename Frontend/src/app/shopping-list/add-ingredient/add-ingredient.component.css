@@ -35,6 +35,10 @@ button{
 button:hover{
   background-color: rgba(213, 213, 53, 0.87);
 }
+button:disabled,
+button[disabled]{
+  background-color: rgb(157, 157, 126);
+}
 .button-group{
   display: flex;
   gap: 2rem;
