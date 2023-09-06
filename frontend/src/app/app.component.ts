@@ -7,7 +7,6 @@ import {IngredientApiServiceService} from "./shopping-list/ingredient-api-servic
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'frontend';
   constructor(private ingredientApiService: IngredientApiServiceService) {
 
   }

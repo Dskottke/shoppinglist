@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShoppingListComponent } from './shopping-list.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {AddIngredientComponent} from "./add-ingredient/add-ingredient.component";
+import {FormsModule} from "@angular/forms";
 
 describe('ShoppingListComponent', () => {
   let component: ShoppingListComponent;
@@ -8,7 +11,8 @@ describe('ShoppingListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ShoppingListComponent]
+      declarations: [ShoppingListComponent,AddIngredientComponent],
+      imports: [HttpClientTestingModule,FormsModule]
     });
     fixture = TestBed.createComponent(ShoppingListComponent);
     component = fixture.componentInstance;
