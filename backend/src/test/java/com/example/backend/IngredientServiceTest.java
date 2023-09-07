@@ -32,21 +32,21 @@ class IngredientServiceTest {
     @Test
     @DisplayName("addIngredient -> Should return HTTP-Status 200 and the updated Ingredient")
     void whenAddIngredientWithAlreadyExistingIngredientShouldReturnStatus200AndUpdatedIngredient() {
-        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10);
+        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, Type.GRAM);
         when(ingredientRepository.findByName("testIngredient")).thenReturn(java.util.Optional.of(ingredient));
-        when(ingredientRepository.save(new Ingredient("testId","testIngredient",15))).thenReturn(new Ingredient("testId", "testIngredient", 15));
-        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 5));
-        ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.OK).body(new Ingredient("testId", "testIngredient", 15));
+        when(ingredientRepository.save(new Ingredient("testId","testIngredient",15,Type.GRAM))).thenReturn(new Ingredient("testId", "testIngredient", 15,Type.GRAM));
+        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 5,Type.GRAM));
+        ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.OK).body(new Ingredient("testId", "testIngredient", 15,Type.GRAM));
         assertEquals(expected, actual);
     }
     @Test
     @DisplayName("addIngredient -> Should return HTTP-Status 201 and new Ingredient")
     void whenAddIngredientWithNotExistingIngredientShouldReturnStatus201AndAddedIngredient() {
-        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10);
+        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10,Type.GRAM);
         when(ingredientRepository.findByName("testIngredient")).thenReturn(Optional.empty());
         when(appUtilsService.createUUID()).thenReturn("testId");
-        when(ingredientRepository.save(new Ingredient(appUtilsService.createUUID(),"testIngredient",10))).thenReturn(ingredient);
-        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 10));
+        when(ingredientRepository.save(new Ingredient(appUtilsService.createUUID(),"testIngredient",10,Type.GRAM))).thenReturn(ingredient);
+        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 10,Type.GRAM));
         ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.CREATED).body(ingredient);
         assertEquals(expected, actual);
     }

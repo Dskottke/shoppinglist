@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Builder
 @Document
-public record Ingredient(String id, String name, int amount) {
+public record Ingredient(String id, String name, int amount, Type type) {
 }

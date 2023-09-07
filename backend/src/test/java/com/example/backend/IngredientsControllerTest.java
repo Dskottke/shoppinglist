@@ -44,14 +44,16 @@ class IngredientsControllerTest {
                         .content("""
                                 {
                                 "name" : "Apfel",
-                                "amount" : 10
+                                "amount" : 10,
+                                "type" : "Stk"
                                 }
                                 """))
                 .andExpect(status().is(201))
                 .andExpect(content().json("""
                         {
                         "name": "Apfel",
-                        "amount": 10
+                        "amount": 10,
+                        "type": "Stk"
                         }
                         """
                 ))
@@ -69,14 +71,16 @@ class IngredientsControllerTest {
                         .content("""
                                 {
                                 "name" : "Apfel",
-                                "amount" : 10
+                                "amount" : 10,
+                                "type" : "Stk"
                                 }
                                 """))
                 .andExpect(status().is(201))
                 .andExpect(content().json("""
                         {
                         "name": "Apfel",
-                        "amount": 10
+                        "amount": 10,
+                        "type": "Stk"
                         }
                         """
                 ))
@@ -93,7 +97,8 @@ class IngredientsControllerTest {
                         .content("""
                                 {
                                 "name" : "Apfel",
-                                "amount" : 10
+                                "amount" : 10,
+                                "type" : "Stk"
                                 }
                                 """))
                 .andExpect(status().is(200))

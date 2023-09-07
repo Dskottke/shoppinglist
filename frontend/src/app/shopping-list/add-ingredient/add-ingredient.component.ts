@@ -10,9 +10,11 @@ import {Ingredient} from "../ingredient.model";
 })
 export class AddIngredientComponent{
 @ViewChild("ingredientForm", {static:true}) form : NgForm
+  types   = ["g","L","Stk","ml","mg"]
   constructor(private ingredientApiService: IngredientApiService){
   }
   onFormSubmit(){
+    console.log(this.form.form.value)
   const ingredientToAdd = this.form.form.value as Ingredient
   this.ingredientApiService.addIngredient(ingredientToAdd);
   this.form.resetForm();
