@@ -38,7 +38,7 @@ export class IngredientApiService {
       });
   }
 
-  setDone(ingredientsDone: String[]) {
+  setDone(ingredientsDone: string[]) {
     this.httpClient
       .delete("/api/ingredients", {observe: "response", body: ingredientsDone})
       .subscribe({

@@ -7,6 +7,8 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AddIngredientComponent } from './shopping-list/add-ingredient/add-ingredient.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import {AppRoutingModule} from "./app-routing-module";
+import { RecipesComponent } from './recipes/recipes.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import {FormsModule} from "@angular/forms";
     HeaderComponent,
     ShoppingListComponent,
     AddIngredientComponent,
+    RecipesComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
