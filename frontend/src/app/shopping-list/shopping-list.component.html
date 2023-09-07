@@ -2,14 +2,23 @@
   <div class="col-lg-6">
     <div class="shadow-sm" style="margin: 2rem">
       <h5 *ngIf="shoppingList.length < 1">Leere Liste</h5>
-    <ul
-      class="list-group ingredient-group">
-      <li *ngFor="let i of shoppingList"
-          class="list-group-item bg-dark-subtle flex space-between"><span>{{i.name}}</span><span>{{i.amount}}</span></li>
-    </ul>
-  </div>
+      <ul
+        class="list-group ingredient-group">
+        <li *ngFor="let ingredient of shoppingList"
+            class="list-group-item bg-dark-subtle flex space-between">
+          <div class="w-100 flex space-between m-2">
+            <span>{{ingredient.name}}</span>
+            <span>{{ingredient.amount}}</span>
+          </div>
+          <input [(ngModel)]="ingredient.succeed" type="checkbox" [id]="ingredient.id">
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="shoppingList.length > 0" class="m-4 button-group">
+      <button (click)="onDoneClick()" class="m-2">done</button>
+    </div>
   </div>
   <div class="col-lg-6">
-  <app-add-ingredient></app-add-ingredient>
+    <app-add-ingredient></app-add-ingredient>
   </div>
 </div>

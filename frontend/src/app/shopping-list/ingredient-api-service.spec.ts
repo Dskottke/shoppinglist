@@ -20,8 +20,8 @@ describe('IngredientApiService', () => {
   });
   it('should fetch ingredients', () => {
     const ingredients: Ingredient[] = [
-      {id: "1", name: "apple", amount: 10},
-      {id: "2", name: "banana", amount: 5}
+      {id: "1", name: "apple", amount: 10, succeed: false},
+      {id: "2", name: "banana", amount: 5, succeed: false}
     ]
     service.getAllIngredients()
     const req = httpMock.expectOne("/api/ingredients")
@@ -33,7 +33,7 @@ describe('IngredientApiService', () => {
   })
   it('should add an ingredient', () => {
     const ingredientToAdd: Ingredient = {
-      id: "1", name: "apple", amount: 10
+      id: "1", name: "apple", amount: 10, succeed: false
     }
     const expected : Ingredient[] = [ingredientToAdd]
 
@@ -46,4 +46,19 @@ describe('IngredientApiService', () => {
       expect(expected).toBe(ingredients)
     })
   })
-});
+  it('should update an ingredient', () => {
+    const ingredientToAdd: Ingredient = {
+      id: "1", name: "apple", amount: 10, succeed: false
+    }
+    const expected: Ingredient[] = [ingredientToAdd]
+
+    service.addIngredient(ingredientToAdd)
+    const req = httpMock.expectOne("/api/ingredients")
+    expect(req.request.method).toBe("PUT")
+    expect(req.request.body).toBe(ingredientToAdd)
+    req.flush({id: "1", name: "apple", amount: 10}, {status: 200, statusText: "Created"})
+    service.ingredients.subscribe((ingredients) => {
+      expect(expected).toBe(ingredients)
+    })
+  })
+})

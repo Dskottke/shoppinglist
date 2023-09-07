@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,8 +20,12 @@ public class IngredientsController {
     }
 
     @PutMapping()
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Ingredient> addIngredient(@RequestBody IngredientWithoutId ingredientToAdd) {
         return ingredientService.addIngredient(ingredientToAdd);
+    }
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteIngredients(@RequestBody List<String> ingredientsDone){
+       ingredientService.deleteIngredients(ingredientsDone);
     }
 }

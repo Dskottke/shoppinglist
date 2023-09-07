@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Ingredient} from "./ingredient.model";
 import {IngredientApiService} from "./ingredient-api.service";
 
@@ -23,4 +23,12 @@ export class ShoppingListComponent implements OnInit {
     })
   }
 
+
+  onDoneClick() {
+    const ingredientsDone : string[] =
+      this.shoppingList.filter((ingredient)=>ingredient.succeed === true)
+        .map((ingredient)=> ingredient.id)
+
+    this.ingredientApiService.setDone(ingredientsDone)
+  }
 }

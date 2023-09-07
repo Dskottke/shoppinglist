@@ -43,4 +43,8 @@ public class IngredientService {
     public List<Ingredient> getAllIngredients() {
         return this.ingredientRepository.findAll();
     }
+
+    public void deleteIngredients(List<String> ingredientIds) {
+        ingredientIds.forEach(ingredientRepository::deleteById);
+    }
 }

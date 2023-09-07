@@ -25,8 +25,8 @@ describe('ShoppingListComponent', () => {
   });
   it('should render 2 list-items when shopping-list array has 2 items', () => {
     fixture.componentInstance.shoppingList = [
-      {id: "10", name: "apple", amount: 10},
-      {id: "10", name: "banana", amount: 10}
+      {id: "10", name: "apple", amount: 10, succeed: false},
+      {id: "10", name: "banana", amount: 10, succeed: false}
     ]
     fixture.detectChanges();
     const htmlElement = fixture.nativeElement as HTMLElement
@@ -38,7 +38,7 @@ describe('ShoppingListComponent', () => {
   })
   it("shopping-list should match with Ingredients in ingredient-api-service", () => {
     const service = fixture.debugElement.injector.get(IngredientApiService)
-    const mockArray = [{id: "1", name: "apple", amount: 10}]
+    const mockArray = [{id: "1", name: "apple", amount: 10, succeed:false}]
     service.ingredients.next(mockArray)
     const shoppingList = fixture.componentInstance.shoppingList
     expect(mockArray).toEqual(shoppingList)
