@@ -20,8 +20,8 @@ describe('IngredientApiService', () => {
   });
   it('should fetch ingredients', () => {
     const ingredients: Ingredient[] = [
-      {id: "1", name: "apple", amount: 10, succeed: false},
-      {id: "2", name: "banana", amount: 5, succeed: false}
+      {id: "1", name: "apple", amount: 10, succeed: false,type:"Stk"},
+      {id: "2", name: "banana", amount: 5, succeed: false, type:"Stk"}
     ]
     service.getAllIngredients()
     const req = httpMock.expectOne("/api/ingredients")
@@ -33,7 +33,7 @@ describe('IngredientApiService', () => {
   })
   it('should add an ingredient', () => {
     const ingredientToAdd: Ingredient = {
-      id: "1", name: "apple", amount: 10, succeed: false
+      id: "1", name: "apple", amount: 10, succeed: false, type: "Stk"
     }
     const expected : Ingredient[] = [ingredientToAdd]
 
@@ -48,7 +48,7 @@ describe('IngredientApiService', () => {
   })
   it('should update an ingredient', () => {
     const ingredientToAdd: Ingredient = {
-      id: "1", name: "apple", amount: 10, succeed: false
+      id: "1", name: "apple", amount: 10, succeed: false ,type:"Stk"
     }
     const expected: Ingredient[] = [ingredientToAdd]
 

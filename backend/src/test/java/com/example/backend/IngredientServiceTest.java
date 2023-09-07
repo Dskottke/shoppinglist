@@ -6,11 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 
 class IngredientServiceTest {
@@ -34,23 +35,43 @@ class IngredientServiceTest {
     void whenAddIngredientWithAlreadyExistingIngredientShouldReturnStatus200AndUpdatedIngredient() {
         Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, Type.GRAM);
         when(ingredientRepository.findByName("testIngredient")).thenReturn(java.util.Optional.of(ingredient));
-        when(ingredientRepository.save(new Ingredient("testId","testIngredient",15,Type.GRAM))).thenReturn(new Ingredient("testId", "testIngredient", 15,Type.GRAM));
-        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 5,Type.GRAM));
-        ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.OK).body(new Ingredient("testId", "testIngredient", 15,Type.GRAM));
+        when(ingredientRepository.save(new Ingredient("testId", "testIngredient", 15, Type.GRAM))).thenReturn(new Ingredient("testId", "testIngredient", 15, Type.GRAM));
+        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 5, Type.GRAM));
+        ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.OK).body(new Ingredient("testId", "testIngredient", 15, Type.GRAM));
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("addIngredient -> Should throw an exception")
+    void whenAddIngredientWithAlreadyExistingIngredientWithOtherTypeShouldThrowAnException() {
+        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, Type.GRAM);
+        when(ingredientRepository.findByName("testIngredient")).thenReturn(java.util.Optional.of(ingredient));
+        assertThrows(TypeNotMatchException.class, () -> {
+            IngredientWithoutId ingredientToAdd = new IngredientWithoutId("testIngredient", 10, Type.PIECES);
+            ingredientService.addIngredient(ingredientToAdd);
+        });
+    }
+
     @Test
     @DisplayName("addIngredient -> Should return HTTP-Status 201 and new Ingredient")
     void whenAddIngredientWithNotExistingIngredientShouldReturnStatus201AndAddedIngredient() {
-        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10,Type.GRAM);
+        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, Type.GRAM);
         when(ingredientRepository.findByName("testIngredient")).thenReturn(Optional.empty());
         when(appUtilsService.createUUID()).thenReturn("testId");
-        when(ingredientRepository.save(new Ingredient(appUtilsService.createUUID(),"testIngredient",10,Type.GRAM))).thenReturn(ingredient);
-        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 10,Type.GRAM));
+        when(ingredientRepository.save(new Ingredient(appUtilsService.createUUID(), "testIngredient", 10, Type.GRAM))).thenReturn(ingredient);
+        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 10, Type.GRAM));
         ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.CREATED).body(ingredient);
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("deleteIngredients -> Should delete all Ingredients by id")
+    void expectThatDeleteMethodHasBeenCalled() {
+        List<String> ids = List.of("1");
+        doNothing().when(ingredientRepository).deleteById("1");
+        ingredientService.deleteIngredients(ids);
+        verify(ingredientRepository).deleteById("1");
+    }
 
 
 }

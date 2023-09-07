@@ -12,8 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -110,7 +109,47 @@ class IngredientsControllerTest {
                         }
                         """.replace("<id>", ingredient.id())
                 ));
+    }
 
+    @Test
+    @DirtiesContext
+    @DisplayName("DELETE -> Should delete item and return http-status 204")
+    void deleteIngredientByIdShouldReturnHTTPStatus204() throws Exception {
+        MvcResult response = mockMvc.perform(put("/api/ingredients")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "name": "apple",
+                                "amount": 10,
+                                "type": "Stk"
+                                }"""))
+                .andExpect(status().is(201))
+                .andExpect(content()
+                        .json("""
+                                {
+                                "name": "apple",
+                                "amount": 10,
+                                "type": "Stk"
+                                }
+                                """))
+                .andReturn();
 
+        Ingredient ingredient = objectMapper.readValue(response.getResponse().getContentAsString(), Ingredient.class);
+
+        mockMvc.perform(delete("/api/ingredients")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                [
+                                "<id>"
+                                ]
+                                """.replace("<id>", ingredient.id())))
+                .andExpect(status().is(204));
+
+        mockMvc.perform(get("/api/ingredients"))
+                .andExpect(status().is(200))
+                .andExpect(content().json(
+                """
+                        []
+                        """));
     }
 }

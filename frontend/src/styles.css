@@ -1,11 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
 button{
   color: black;
   width: 150px;
   height: 40px;
   background-color: #d5d535;
   border-radius: 6px;
-  border: none
+  border: 1px black solid;
 }
 button:hover{
   background-color: rgba(213, 213, 53, 0.87);

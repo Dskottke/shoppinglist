@@ -29,7 +29,8 @@ describe('AddIngredientComponent', () => {
     setTimeout(() => {
       fixture.componentInstance.form.setValue({
         name: "apple",
-        amount: 10
+        amount: 10,
+        type: "Stk"
       });
     }, 1000)
 
@@ -41,7 +42,8 @@ describe('AddIngredientComponent', () => {
     expect(spyIngredient).toHaveBeenCalled();
     expect(fixture.componentInstance.form.form.value).toEqual({
       name: null,
-      amount: null
+      amount: null,
+      type:null
     });
   });
   it('should disable the submit button when the form is invalid', async () => {
@@ -50,7 +52,8 @@ describe('AddIngredientComponent', () => {
 
     fixture.componentInstance.form.setValue({
       name: "apple",
-      amount: null
+      amount: null,
+      type:"L"
     })
 
     fixture.detectChanges();
@@ -65,7 +68,8 @@ describe('AddIngredientComponent', () => {
 
     fixture.componentInstance.form.setValue({
       name: "apple",
-      amount: 10
+      amount: 10,
+      type: "Stk"
     })
 
     spyOn(component, 'onFormSubmit');
@@ -82,7 +86,8 @@ describe('AddIngredientComponent', () => {
 
     fixture.componentInstance.form.setValue({
       name: "apple",
-      amount: 10
+      amount: 10,
+      type:"Stk"
     })
 
     fixture.detectChanges();
@@ -95,13 +100,14 @@ describe('AddIngredientComponent', () => {
 
     fixture.componentInstance.form.setValue({
       name: "apple",
-      amount: 10
+      amount: 10,
+      type: "Stk"
     })
 
     const resetButton = fixture.debugElement.nativeElement.querySelector('button[type="button"]');
     resetButton.click()
 
-    expect(fixture.componentInstance.form.form.value).toEqual({name:null,amount:null})
+    expect(fixture.componentInstance.form.form.value).toEqual({name:null,amount:null,type:null})
 
   })
 });

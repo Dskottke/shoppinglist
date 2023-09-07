@@ -1,30 +1,31 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {AppModule} from "./app.module";
+import {RouterTestingModule} from "@angular/router/testing";
+import {routes} from "./app-routing-module";
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports:[HttpClientTestingModule,AppModule]
-  }));
+    let fixture: ComponentFixture<AppComponent>;
+    beforeEach(() => {
+            TestBed.configureTestingModule({
+                    imports: [HttpClientTestingModule, AppModule, RouterTestingModule.withRoutes(routes)]
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+                }
+            )
+            fixture = TestBed.createComponent(AppComponent)
+        }
+    );
 
-  it('should render header component', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-header')).toBeTruthy()
-  });
+    it('should create the app', () => {
+        const app = fixture.componentInstance;
+        expect(app).toBeTruthy();
+    });
 
-  it('should shopping-list component', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-shopping-list')).toBeTruthy()
-  });
+    it('should render header component', () => {
+        fixture.detectChanges();
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('app-header')).toBeTruthy()
+    });
+
 });

@@ -5,7 +5,7 @@ import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
 import {RecipesComponent} from "./recipes/recipes.component";
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: "", redirectTo: "shopping-list", pathMatch:'prefix'},
   {path: "shopping-list", component: ShoppingListComponent},
   {path: "recipes", component: RecipesComponent}

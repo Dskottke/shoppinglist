@@ -23,12 +23,10 @@ export class ShoppingListComponent implements OnInit {
     })
   }
 
-
   onDoneClick() {
     const ingredientsDone : string[] =
       this.shoppingList.filter((ingredient)=>ingredient.succeed === true)
         .map((ingredient)=> ingredient.id)
-
     this.ingredientApiService.setDone(ingredientsDone)
   }
 }
