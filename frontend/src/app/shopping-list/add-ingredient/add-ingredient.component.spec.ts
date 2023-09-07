@@ -59,7 +59,7 @@ describe('AddIngredientComponent', () => {
     expect(submitButton.disabled).toBe(true);
   });
 
-  it('should call the onFormSubmit() method when the form is submitted', async() => {
+  it('should call the onFormSubmit() method when the form is submitted', async () => {
 
     await fixture.whenStable();
 
@@ -90,5 +90,18 @@ describe('AddIngredientComponent', () => {
     const submitButton = fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
     expect(submitButton.disabled).toBe(false);
   });
+  it('should reset the form when reset button is clicked', async () => {
+    await fixture.whenStable()
 
+    fixture.componentInstance.form.setValue({
+      name: "apple",
+      amount: 10
+    })
+
+    const resetButton = fixture.debugElement.nativeElement.querySelector('button[type="button"]');
+    resetButton.click()
+
+    expect(fixture.componentInstance.form.form.value).toEqual({name:null,amount:null})
+
+  })
 });
