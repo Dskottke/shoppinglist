@@ -6,7 +6,7 @@ import {Subject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class IngredientApiServiceService {
+export class IngredientApiService {
   ingredients: Subject<Ingredient[]> = new Subject()
   constructor(private httpClient : HttpClient) { }
   getAllIngredients(){
@@ -21,7 +21,7 @@ export class IngredientApiServiceService {
   }
  addIngredient(ingredientToAdd : Ingredient){
  this.httpClient
-   .post("api/ingredients",ingredientToAdd,{observe:"response"})
+   .put("/api/ingredients",ingredientToAdd,{observe:"response"})
    .subscribe({
      next: (response) => {
        if(response.status === 201){

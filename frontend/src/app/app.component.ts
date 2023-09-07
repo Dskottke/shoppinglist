@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IngredientApiServiceService} from "./shopping-list/ingredient-api-service.service";
+import {IngredientApiService} from "./shopping-list/ingredient-api.service";
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import {IngredientApiServiceService} from "./shopping-list/ingredient-api-servic
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private ingredientApiService: IngredientApiServiceService) {
+  constructor(private ingredientApiService: IngredientApiService) {
 
   }
   ngOnInit(): void {

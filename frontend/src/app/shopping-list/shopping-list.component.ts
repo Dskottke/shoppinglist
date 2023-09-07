@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Ingredient} from "./ingredient.model";
-import {IngredientApiServiceService} from "./ingredient-api-service.service";
+import {IngredientApiService} from "./ingredient-api.service";
 
 @Component({
   selector: 'app-shopping-list',
@@ -10,10 +10,14 @@ import {IngredientApiServiceService} from "./ingredient-api-service.service";
 export class ShoppingListComponent implements OnInit {
   shoppingList: Ingredient[] = []
 
-  constructor(private ingredientApiService: IngredientApiServiceService) {
+  constructor(private ingredientApiService: IngredientApiService) {
   }
 
   ngOnInit(): void {
+    this.getIngredients()
+  }
+
+  getIngredients() {
     this.ingredientApiService.ingredients.subscribe((ingredients) => {
       this.shoppingList = ingredients;
     })

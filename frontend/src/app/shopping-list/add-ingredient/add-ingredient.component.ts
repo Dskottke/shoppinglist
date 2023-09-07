@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {IngredientApiServiceService} from "../ingredient-api-service.service";
+import {IngredientApiService} from "../ingredient-api.service";
 import {Ingredient} from "../ingredient.model";
 
 @Component({
@@ -10,7 +10,7 @@ import {Ingredient} from "../ingredient.model";
 })
 export class AddIngredientComponent{
 @ViewChild("ingredientForm", {static:true}) form : NgForm
-  constructor(private ingredientApiService: IngredientApiServiceService){
+  constructor(private ingredientApiService: IngredientApiService){
   }
   onFormSubmit(){
   const ingredientToAdd = this.form.form.value as Ingredient
