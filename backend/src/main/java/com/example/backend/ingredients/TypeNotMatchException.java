@@ -1,4 +1,4 @@
-package com.example.backend;
+package com.example.backend.ingredients;
 
 public class TypeNotMatchException extends RuntimeException{
     public TypeNotMatchException(String message) {

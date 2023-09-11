@@ -1,6 +1,6 @@
-package com.example.backend;
+package com.example.backend.ingredients;
 
-import org.springframework.data.domain.Example;
+import com.example.backend.ingredients.Ingredient;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

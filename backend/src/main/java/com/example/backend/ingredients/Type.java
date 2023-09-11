@@ -1,4 +1,4 @@
-package com.example.backend;
+package com.example.backend.ingredients;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

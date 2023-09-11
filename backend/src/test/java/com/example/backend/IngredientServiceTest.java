@@ -1,5 +1,6 @@
 package com.example.backend;
 
+import com.example.backend.ingredients.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

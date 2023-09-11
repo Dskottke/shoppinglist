@@ -1,5 +1,6 @@
 package com.example.backend;
 
+import com.example.backend.ingredients.Ingredient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
