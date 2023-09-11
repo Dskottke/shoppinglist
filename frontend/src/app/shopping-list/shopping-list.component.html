@@ -4,7 +4,8 @@
       <h5 *ngIf="shoppingList.length < 1">Leere Liste</h5>
       <ul
         class="list-group ingredient-group">
-        <li *ngFor="let ingredient of shoppingList"
+        <li  *ngFor="let ingredient of shoppingList"
+            [style]="ingredient.succeed?'textDecoration: line-through':'textDecoration: none'"
             class="list-group-item bg-dark-subtle flex space-between">
           <div class="w-100 flex space-between m-2">
             <span>{{ingredient.name}}</span>
