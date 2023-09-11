@@ -1,10 +1,12 @@
 package com.example.backend.recipes;
 
+import com.example.backend.recipes.models.Recipe;
 import com.example.backend.recipes.models.RecipeCollection;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -18,14 +20,14 @@ public class RecipeApiService {
         this.webClient = WebClient.create(basicUrl);
     }
 
-    public RecipeCollection getRandomRecipeCollection() {
-        return Objects.requireNonNull(webClient
+    public List<Recipe> getRandomRecipeCollection() {
+        return Objects.requireNonNull(Objects.requireNonNull(webClient
                         .get()
                         .uri("/recipes/random?number=10&apiKey=" + token)
                         .retrieve()
                         .toEntity(RecipeCollection.class)
                         .block())
-                .getBody();
+                .getBody()).recipes();
 
     }
 }

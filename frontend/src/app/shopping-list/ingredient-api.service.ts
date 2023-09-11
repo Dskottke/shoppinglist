@@ -7,7 +7,7 @@ import {BehaviorSubject, Subject} from "rxjs";
   providedIn: 'root'
 })
 export class IngredientApiService {
-  ingredients: BehaviorSubject<Ingredient[]> = new BehaviorSubject([])
+  ingredients: Subject<Ingredient[]> = new BehaviorSubject([])
 
   constructor(private httpClient: HttpClient) {
   }

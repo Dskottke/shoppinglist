@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing-module";
 import { RecipesComponent } from './recipes/recipes.component';
+import { RandomRecipeListComponent } from './recipes/random-recipe-list/random-recipe-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RecipesComponent } from './recipes/recipes.component';
     ShoppingListComponent,
     AddIngredientComponent,
     RecipesComponent,
+    RandomRecipeListComponent,
   ],
   imports: [
     BrowserModule,

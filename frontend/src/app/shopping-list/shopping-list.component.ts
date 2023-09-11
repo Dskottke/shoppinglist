@@ -11,22 +11,19 @@ import {ActivatedRoute, Data} from "@angular/router";
 export class ShoppingListComponent implements OnInit {
   shoppingList: Ingredient[] = []
 
-  constructor(private ingredientApiService: IngredientApiService, private activeRoute: ActivatedRoute) {
+  constructor(private ingredientApiService : IngredientApiService, private activeRoute: ActivatedRoute) {
   }
 
 
   ngOnInit(): void {
-    this.getIngredients()
+    this.ingredientApiService.ingredients.subscribe((value)=>{
+      this.shoppingList = value
+    })
     this.activeRoute.data.subscribe((data: Data) => {
       this.shoppingList = data['data']
     })
   }
 
-  getIngredients() {
-    this.ingredientApiService.ingredients.subscribe((ingredients) => {
-      this.shoppingList = ingredients;
-    })
-  }
 
   onDoneClick() {
     const ingredientsDone: string[] =
