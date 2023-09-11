@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Ingredient} from "./ingredient.model";
 import {IngredientApiService} from "./ingredient-api.service";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {ActivatedRoute, Data} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-list',
@@ -11,11 +11,15 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 export class ShoppingListComponent implements OnInit {
   shoppingList: Ingredient[] = []
 
-  constructor(private ingredientApiService: IngredientApiService) {
+  constructor(private ingredientApiService: IngredientApiService, private activeRoute: ActivatedRoute) {
   }
+
 
   ngOnInit(): void {
     this.getIngredients()
+    this.activeRoute.data.subscribe((data: Data) => {
+      this.shoppingList = data['data']
+    })
   }
 
   getIngredients() {

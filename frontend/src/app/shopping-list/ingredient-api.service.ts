@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpStatusCode} from "@angular/common/http";
 import {Ingredient} from "./ingredient.model";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class IngredientApiService {
-  ingredients: Subject<Ingredient[]> = new Subject()
+  ingredients: BehaviorSubject<Ingredient[]> = new BehaviorSubject([])
 
   constructor(private httpClient: HttpClient) {
   }
