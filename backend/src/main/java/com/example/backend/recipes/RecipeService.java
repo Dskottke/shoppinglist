@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RecipeService {
+
     private final MongoTemplate mongoTemplate;
 
     public List<Recipe> getRandomRecipes() {

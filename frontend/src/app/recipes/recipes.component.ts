@@ -11,9 +11,7 @@ export class RecipesComponent implements OnInit{
   randomRecipes: Recipe[] = []
 
   constructor(private recipeApiService: RecipeApiService) {
-
   }
-
   ngOnInit(): void {
     this.recipeApiService.randomRecipes.subscribe((recipes) => {
       this.randomRecipes = recipes
