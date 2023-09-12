@@ -1,7 +1,6 @@
 package com.example.backend.recipes;
 
 import com.example.backend.recipes.models.Recipe;
-import com.example.backend.recipes.models.RecipeCollection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +13,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecipeController {
 
-    private final RecipeApiService recipeApiService;
+    private final RecipeService recipeService;
 
     @GetMapping("/random")
     public List<Recipe> getRandomRecipes() {
-        return recipeApiService.getRandomRecipeCollection();
+        return recipeService.getRandomRecipes();
     }
 }
