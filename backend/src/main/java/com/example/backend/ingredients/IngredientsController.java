@@ -19,7 +19,7 @@ public class IngredientsController {
     }
 
     @PutMapping()
-    public ResponseEntity<Ingredient> addIngredient(@RequestBody IngredientWithoutId ingredientToAdd) {
+    public ResponseEntity<Ingredient> addIngredient(@RequestBody RequiredIngredient ingredientToAdd) {
         return ingredientService.addIngredient(ingredientToAdd);
     }
     @DeleteMapping()

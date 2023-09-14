@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {IngredientApiService} from './ingredient-api.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {Ingredient} from "./ingredient.model";
+import {Ingredient} from "./models/ingredient.model";
 
 describe('IngredientApiService', () => {
   let service: IngredientApiService;
@@ -20,8 +20,8 @@ describe('IngredientApiService', () => {
   });
   it('should fetch ingredients', () => {
     const ingredients: Ingredient[] = [
-      {id: "1", name: "apple", amount: 10, succeed: false,type:"Stk"},
-      {id: "2", name: "banana", amount: 5, succeed: false, type:"Stk"}
+      {id: "1", name: "apple", amount: 10, succeed: false,unit:"Stk"},
+      {id: "2", name: "banana", amount: 5, succeed: false, unit:"Stk"}
     ]
     service.getAllIngredients()
     const req = httpMock.expectOne("/api/ingredients")
@@ -33,7 +33,7 @@ describe('IngredientApiService', () => {
   })
   it('should add an ingredient', () => {
     const ingredientToAdd: Ingredient = {
-      id: "1", name: "apple", amount: 10, succeed: false, type: "Stk"
+      id: "1", name: "apple", amount: 10, succeed: false, unit: "Stk"
     }
     const expected : Ingredient[] = [ingredientToAdd]
 
@@ -48,7 +48,7 @@ describe('IngredientApiService', () => {
   })
   it('should update an ingredient', () => {
     const ingredientToAdd: Ingredient = {
-      id: "1", name: "apple", amount: 10, succeed: false ,type:"Stk"
+      id: "1", name: "apple", amount: 10, succeed: false ,unit:"Stk"
     }
     const expected: Ingredient[] = [ingredientToAdd]
 

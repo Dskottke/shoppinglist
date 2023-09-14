@@ -1,6 +1,7 @@
 package com.example.backend.recipes;
 
 import com.example.backend.ingredients.Ingredient;
+import com.example.backend.ingredients.RequiredIngredient;
 import com.example.backend.recipes.models.Recipe;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
@@ -39,9 +40,9 @@ public class RecipeService {
                 .image(document.getString("image"))
                 .readyInMinutes(document.getInteger("readyInMinutes"))
                 .extendedIngredients(document.getList("extendedIngredients", Document.class).stream()
-                        .map(extendedIngredient -> Ingredient.builder()
-                                .id(extendedIngredient.getString("id"))
+                        .map(extendedIngredient -> RequiredIngredient.builder()
                                 .name(extendedIngredient.getString("name"))
+                                .unit(extendedIngredient.getString("unit"))
                                 .amount(extendedIngredient.getInteger("amount"))
                                 .build())
                         .toList())

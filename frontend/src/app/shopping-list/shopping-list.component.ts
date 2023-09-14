@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Ingredient} from "./ingredient.model";
+import {Ingredient} from "./models/ingredient.model";
 import {IngredientApiService} from "./ingredient-api.service";
 import {ActivatedRoute, Data} from "@angular/router";
 

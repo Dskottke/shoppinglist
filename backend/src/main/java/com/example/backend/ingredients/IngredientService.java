@@ -15,7 +15,7 @@ public class IngredientService {
     private final AppUtilsService appUtils;
     private final IngredientRepository ingredientRepository;
 
-    public ResponseEntity<Ingredient> addIngredient(IngredientWithoutId ingredientToAdd) {
+    public ResponseEntity<Ingredient> addIngredient(RequiredIngredient ingredientToAdd) {
 
         Optional<Ingredient> existingIngredient = ingredientRepository.findByName(ingredientToAdd.name());
 
@@ -28,7 +28,7 @@ public class IngredientService {
                 (Ingredient.builder()
                         .id(appUtils.createUUID())
                         .name(ingredientToAdd.name())
-                        .type(ingredientToAdd.type())
+                        .unit(ingredientToAdd.unit())
                         .amount(ingredientToAdd.amount()).build());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newIngredient);
@@ -43,14 +43,14 @@ public class IngredientService {
         ingredientIds.forEach(ingredientRepository::deleteById);
     }
 
-    private ResponseEntity<Ingredient> updateIngredient(Ingredient existingIngredient, IngredientWithoutId updateIngredient) {
-        if (existingIngredient.type().equals(updateIngredient.type())) {
+    private ResponseEntity<Ingredient> updateIngredient(Ingredient existingIngredient, RequiredIngredient updateIngredient) {
+        if (existingIngredient.unit().equals(updateIngredient.unit())) {
 
             Ingredient updatedIngredient = ingredientRepository.save(
                     Ingredient.builder()
                             .id(existingIngredient.id())
                             .name(existingIngredient.name())
-                            .type(existingIngredient.type())
+                            .unit(existingIngredient.unit())
                             .amount(existingIngredient.amount() + updateIngredient.amount())
                             .build());
             return ResponseEntity.status(HttpStatus.OK).body(updatedIngredient);

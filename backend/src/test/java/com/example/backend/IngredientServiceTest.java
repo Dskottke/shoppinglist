@@ -34,21 +34,21 @@ class IngredientServiceTest {
     @Test
     @DisplayName("addIngredient -> Should return HTTP-Status 200 and the updated Ingredient")
     void whenAddIngredientWithAlreadyExistingIngredientShouldReturnStatus200AndUpdatedIngredient() {
-        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, Type.GRAM);
+        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, "g");
         when(ingredientRepository.findByName("testIngredient")).thenReturn(java.util.Optional.of(ingredient));
-        when(ingredientRepository.save(new Ingredient("testId", "testIngredient", 15, Type.GRAM))).thenReturn(new Ingredient("testId", "testIngredient", 15, Type.GRAM));
-        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 5, Type.GRAM));
-        ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.OK).body(new Ingredient("testId", "testIngredient", 15, Type.GRAM));
+        when(ingredientRepository.save(new Ingredient("testId", "testIngredient", 15, "g"))).thenReturn(new Ingredient("testId", "testIngredient", 15, "g"));
+        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new RequiredIngredient("testIngredient", 5, "g"));
+        ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.OK).body(new Ingredient("testId", "testIngredient", 15, "g"));
         assertEquals(expected, actual);
     }
 
     @Test
     @DisplayName("addIngredient -> Should throw an exception")
     void whenAddIngredientWithAlreadyExistingIngredientWithOtherTypeShouldThrowAnException() {
-        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, Type.GRAM);
+        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, "g");
         when(ingredientRepository.findByName("testIngredient")).thenReturn(java.util.Optional.of(ingredient));
         assertThrows(TypeNotMatchException.class, () -> {
-            IngredientWithoutId ingredientToAdd = new IngredientWithoutId("testIngredient", 10, Type.PIECES);
+            RequiredIngredient ingredientToAdd = new RequiredIngredient("testIngredient", 10, "g");
             ingredientService.addIngredient(ingredientToAdd);
         });
     }
@@ -56,11 +56,11 @@ class IngredientServiceTest {
     @Test
     @DisplayName("addIngredient -> Should return HTTP-Status 201 and new Ingredient")
     void whenAddIngredientWithNotExistingIngredientShouldReturnStatus201AndAddedIngredient() {
-        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, Type.GRAM);
+        Ingredient ingredient = new Ingredient("testId", "testIngredient", 10, "g");
         when(ingredientRepository.findByName("testIngredient")).thenReturn(Optional.empty());
         when(appUtilsService.createUUID()).thenReturn("testId");
-        when(ingredientRepository.save(new Ingredient(appUtilsService.createUUID(), "testIngredient", 10, Type.GRAM))).thenReturn(ingredient);
-        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new IngredientWithoutId("testIngredient", 10, Type.GRAM));
+        when(ingredientRepository.save(new Ingredient(appUtilsService.createUUID(), "testIngredient", 10, "g"))).thenReturn(ingredient);
+        ResponseEntity<Ingredient> actual = ingredientService.addIngredient(new RequiredIngredient("testIngredient", 10, "g"));
         ResponseEntity<Ingredient> expected = ResponseEntity.status(HttpStatus.CREATED).body(ingredient);
         assertEquals(expected, actual);
     }

@@ -27,13 +27,13 @@
         required
         class="form-select"
         ngModel
-        name="type"
-        [value]="types"
+        name="unit"
+        [value]="units"
       >
         <option value="" disabled selected>Wähle eine Bestelleinheit</option>
         <option
           [id]="type"
-          *ngFor="let type of types"
+          *ngFor="let type of units"
           [value]="type">
           {{type}}
         </option>

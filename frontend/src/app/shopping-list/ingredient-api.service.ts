@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpStatusCode} from "@angular/common/http";
-import {Ingredient} from "./ingredient.model";
 import {BehaviorSubject, Subject} from "rxjs";
+import {RequiredIngredient} from "./models/requiredIngredient.model";
+import {Ingredient} from "./models/ingredient.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class IngredientApiService {
     })
   }
 
-  addIngredient(ingredientToAdd: Ingredient) {
+  addIngredient(ingredientToAdd: RequiredIngredient) {
     this.httpClient
       .put("/api/ingredients", ingredientToAdd, {observe: "response"})
       .subscribe({

@@ -4,7 +4,7 @@ import {ActivatedRouteSnapshot, ResolveFn, Router, RouterModule, RouterStateSnap
 import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
 import {RecipesComponent} from "./recipes/recipes.component";
 import {IngredientApiService} from "./shopping-list/ingredient-api.service";
-import {Ingredient} from "./shopping-list/ingredient.model";
+import {Ingredient} from "./shopping-list/models/ingredient.model";
 import {RecipeApiService} from "./recipes/recipe-api.service";
 import {Recipe} from "./recipes/recipe.model";
 import {RecipeDetailComponent} from "./recipes/recipe-detail/recipe-detail.component";

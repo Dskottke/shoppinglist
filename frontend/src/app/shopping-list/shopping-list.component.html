@@ -9,7 +9,7 @@
             class="list-group-item bg-dark-subtle flex space-between">
           <div class="w-100 flex space-between m-2">
             <span>{{ingredient.name}}</span>
-            <span>{{ingredient.amount + ingredient.type}}</span>
+            <span>{{ingredient.amount + ingredient.unit}}</span>
           </div>
           <input [(ngModel)]="ingredient.succeed" type="checkbox" [id]="ingredient.id">
         </li>
