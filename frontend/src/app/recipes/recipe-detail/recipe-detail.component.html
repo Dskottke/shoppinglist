@@ -1,1 +1,9 @@
-<p>{{activeRecipe.title}}</p>
+<div class="col-sm-8 flex m-4">
+  <h5>{{activeRecipe.title}}</h5>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let ingredient of activeRecipe.extendedIngredients">
+      {{ingredient.name}}
+      {{ingredient.amount}}
+    </li>
+  </ul>
+</div>

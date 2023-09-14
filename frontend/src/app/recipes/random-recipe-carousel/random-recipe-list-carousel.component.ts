@@ -1,12 +1,12 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Recipe} from "../recipe.model";
 
 @Component({
-  selector: 'app-random-recipe-list',
+  selector: 'app-random-recipe-carousel',
   templateUrl: './random-recipe-carousel.component.html',
   styleUrls: ['./random-recipe-carousel.component.css']
 })
-export class RandomRecipeListCarousel implements OnInit, OnDestroy {
+export class RandomRecipeListCarousel {
   @Input() recipes: Recipe[] = []
   currentIndex: number = 0
   carouselInterval: any
@@ -22,17 +22,7 @@ export class RandomRecipeListCarousel implements OnInit, OnDestroy {
       this.currentIndex = this.currentIndex + 1;
   }
 
-  ngOnInit(): void {
-    this.carouselInterval = setInterval(() => {
-      if (this.currentIndex === this.recipes.length - 1) {
-        this.currentIndex = 0
-      }
-      else
-        this.setNext()
-    }, 5000)
-  }
 
-  ngOnDestroy(): void {
-    clearInterval(this.carouselInterval)
-  }
+
+
 }
