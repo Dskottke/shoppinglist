@@ -12,7 +12,7 @@ export class RecipeApiService {
   constructor(private http: HttpClient) {}
 
   getRandomRecipes(){
-    this.http.get<Recipe[]>("api/recipes/random").subscribe({
+   return this.http.get<Recipe[]>("api/recipes/random").subscribe({
       next: (value)=>{
         this.randomRecipes.next(value)
       }

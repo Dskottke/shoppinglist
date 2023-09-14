@@ -46,6 +46,7 @@ public class RecipeService {
                                 .amount(extendedIngredient.getInteger("amount"))
                                 .build())
                         .toList())
+                .summary(document.getString("summary"))
                 .build();
     }
 

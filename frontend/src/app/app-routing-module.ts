@@ -15,7 +15,11 @@ const shoppingListResolver: ResolveFn<Ingredient[]> = (route: ActivatedRouteSnap
   inject(IngredientApiService).ingredients.subscribe(value => list = value)
   return list
 }
-
+const recipesResolver: ResolveFn<Recipe[]> = (route:ActivatedRouteSnapshot, state : RouterStateSnapshot)=>{
+  let list: Recipe[];
+  inject(RecipeApiService).randomRecipes.subscribe(value => list = value)
+  return list
+}
 const recipeDetailResolver: ResolveFn<Recipe> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const id = route.params['id']
   let recipe: Recipe
@@ -32,7 +36,7 @@ export const routes: Routes = [
   {path: "", redirectTo: "shopping-list", pathMatch: 'full'},
   {path: "shopping-list", component: ShoppingListComponent, resolve: {data: shoppingListResolver}},
   {
-    path: "recipes", component: RecipesComponent,
+    path: "recipes", component: RecipesComponent, resolve: {recipes: recipesResolver},
     children: [
       {path: ":id", component: RecipeDetailComponent, resolve: {recipe: recipeDetailResolver}}
     ]

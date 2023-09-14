@@ -19,4 +19,9 @@ export class RecipeDetailComponent implements OnInit {
     })
   }
 
+  shortenSummaries(summary: string) {
+    const sentences = summary.split(". ");
+    sentences.pop();
+    return sentences.join(". ")
+  }
 }

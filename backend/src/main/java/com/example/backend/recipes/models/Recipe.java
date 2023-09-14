@@ -8,5 +8,11 @@ import java.util.List;
 
 @Builder
 @With
-public record Recipe(String id, String title, List<RequiredIngredient> extendedIngredients, String image, int readyInMinutes) {
+public record Recipe(
+        String id,
+        String title,
+        String summary,
+        List<RequiredIngredient> extendedIngredients,
+        String image,
+        int readyInMinutes) {
 }
