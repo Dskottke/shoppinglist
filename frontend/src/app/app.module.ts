@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing-module";
 import { RecipesComponent } from './recipes/recipes.component';
 import { RandomRecipeListCarousel } from './recipes/random-recipe-carousel/random-recipe-list-carousel.component';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RandomRecipeListCarousel } from './recipes/random-recipe-carousel/rando
     AddIngredientComponent,
     RecipesComponent,
     RandomRecipeListCarousel,
+    RecipeDetailComponent,
   ],
   imports: [
     BrowserModule,

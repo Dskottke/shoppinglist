@@ -14,7 +14,6 @@ export class AddIngredientComponent{
   constructor(private ingredientApiService: IngredientApiService){
   }
   onFormSubmit(){
-    console.log(this.form.form.value)
   const ingredientToAdd = this.form.form.value as Ingredient
   this.ingredientApiService.addIngredient(ingredientToAdd);
   this.form.resetForm();

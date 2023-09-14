@@ -1,1 +1,8 @@
-<app-random-recipe-list [recipes]="randomRecipes"></app-random-recipe-list>
+<div class="row">
+  <div class="col-lg-8">
+    <app-random-recipe-list [recipes]="randomRecipes"></app-random-recipe-list>
+  </div>
+  <div class="col-lg-4">
+  <router-outlet></router-outlet>
+  </div>
+</div>

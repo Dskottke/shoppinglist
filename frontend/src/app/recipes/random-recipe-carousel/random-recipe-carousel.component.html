@@ -1,5 +1,5 @@
 <div class="row flex m-4">
-  <div class="col-sm-4">
+  <div class="col-sm-7">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button *ngFor="let recipe of recipes, let i = index" type="button" data-bs-target="#carouselExampleDark"
@@ -8,15 +8,18 @@
                 aria-label="Slide {{i}}"></button>
       </div>
       <div class="carousel-inner">
-        <div *ngFor="let recipe of recipes, let i = index"
-             [class]="currentIndex === i ?'carousel-item active':'carousel-item'" data-bs-interval="10000">
-          <img [src]="recipe.image" class="d-block w-100 img-responsive" [alt]="recipe.title">
-          <div class="carousel-caption d-none d-md-block">
-            <div class="text-box">
-            <h5>{{recipe.title}}</h5>
-            <p>Zubereitungszeit: {{recipe.readyInMinutes}} Min</p>
+        <div
+          *ngFor="let recipe of recipes, let i = index"
+          [class]="currentIndex === i ?'carousel-item active':'carousel-item'" data-bs-interval="10000">
+          <a [routerLink]="[recipe.id]">
+            <img [src]="recipe.image" class="d-block w-100 img-responsive" [alt]="recipe.title">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="text-box">
+                <h5>{{recipe.title}}</h5>
+                <p>Zubereitungszeit: {{recipe.readyInMinutes}} Min</p>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <button (click)="setPrev()" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
