@@ -8,26 +8,14 @@ import {ActivatedRoute, Data} from "@angular/router";
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css'],
 })
-export class ShoppingListComponent implements OnInit {
-  shoppingList: Ingredient[] = []
+export class ShoppingListComponent {
 
-  constructor(private ingredientApiService : IngredientApiService, private activeRoute: ActivatedRoute) {
+  constructor(public ingredientApiService : IngredientApiService) {
   }
-
-
-  ngOnInit(): void {
-    this.ingredientApiService.ingredients.subscribe((value)=>{
-      this.shoppingList = value
-    })
-    this.activeRoute.data.subscribe((data: Data) => {
-      this.shoppingList = data['data']
-    })
-  }
-
 
   onDoneClick() {
     const ingredientsDone: string[] =
-      this.shoppingList.filter((ingredient) => ingredient.succeed === true)
+      this.ingredientApiService.ingredients.filter((ingredient) => ingredient.succeed === true)
         .map((ingredient) => ingredient.id)
     this.ingredientApiService.setDone(ingredientsDone)
   }

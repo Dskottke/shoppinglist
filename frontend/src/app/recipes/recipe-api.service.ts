@@ -1,23 +1,23 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Subject} from "rxjs";
 import {Recipe} from "./recipe.model";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class RecipeApiService {
-  randomRecipes: Subject<Recipe[]> = new BehaviorSubject([])
+    randomRecipe: Recipe[] = []
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+    }
 
-  getRandomRecipes(){
-   return this.http.get<Recipe[]>("api/recipes/random").subscribe({
-      next: (value)=>{
-        this.randomRecipes.next(value)
-      }
-    })
-  }
+    getRandomRecipes() {
+        return this.http.get<Recipe[]>("api/recipes/random").subscribe({
+            next: (response) => {
+                this.randomRecipe = response
+            }
+        })
+    }
 
 
 }

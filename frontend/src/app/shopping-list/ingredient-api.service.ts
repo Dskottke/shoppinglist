@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpStatusCode} from "@angular/common/http";
-import {BehaviorSubject, Subject} from "rxjs";
 import {RequiredIngredient} from "./models/requiredIngredient.model";
 import {Ingredient} from "./models/ingredient.model";
 
@@ -8,7 +7,7 @@ import {Ingredient} from "./models/ingredient.model";
   providedIn: 'root'
 })
 export class IngredientApiService {
-  ingredients: Subject<Ingredient[]> = new BehaviorSubject([])
+  ingredients: Ingredient[] = []
 
   constructor(private httpClient: HttpClient) {
   }
@@ -16,13 +15,14 @@ export class IngredientApiService {
   getAllIngredients() {
     this.httpClient.get<Ingredient[]>("/api/ingredients").subscribe({
       next: (response) => {
-        this.ingredients.next(response)
+        this.ingredients = response
       },
       error: error => {
         console.log(error)
       }
     })
   }
+
 
   addIngredient(ingredientToAdd: RequiredIngredient) {
     this.httpClient

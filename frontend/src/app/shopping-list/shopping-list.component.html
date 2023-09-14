@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="shadow-sm" style="margin: 2rem">
-      <h5 *ngIf="shoppingList.length < 1">Leere Liste</h5>
+      <h5 *ngIf="ingredientApiService.ingredients.length < 1">Leere Liste</h5>
       <ul
         class="list-group ingredient-group">
-        <li  *ngFor="let ingredient of shoppingList"
+        <li  *ngFor="let ingredient of ingredientApiService.ingredients"
             [style]="ingredient.succeed?'textDecoration: line-through':'textDecoration: none'"
             class="list-group-item bg-dark-subtle flex space-between">
           <div class="w-100 flex space-between m-2">
@@ -15,7 +15,7 @@
         </li>
       </ul>
     </div>
-    <div *ngIf="shoppingList.length > 0" class="m-4 button-group">
+    <div *ngIf="ingredientApiService.ingredients.length > 0" class="m-4 button-group">
       <button (click)="onDoneClick()" class="m-2">done</button>
     </div>
   </div>
