@@ -14,22 +14,31 @@ export class RandomRecipeListCarousel implements OnChanges {
     constructor(private router: Router, private route: ActivatedRoute) {
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        const id = changes.recipes.currentValue[this.currentIndex].id
+        this.router.navigate([id], {relativeTo: this.route})
+    }
+
     setPrev() {
         if (this.currentIndex !== 0) {
             this.currentIndex = this.currentIndex - 1;
-            this.router.navigate([this.recipes[this.currentIndex].id], {relativeTo: this.route})
+            this.navigate()
         }
     }
 
     setNext() {
         if (this.currentIndex !== this.recipes.length - 1) {
             this.currentIndex = this.currentIndex + 1;
-            this.router.navigate([this.recipes[this.currentIndex].id], {relativeTo: this.route})
+            this.navigate()
         }
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        const id = changes.recipes.currentValue[this.currentIndex].id
-        this.router.navigate([id], {relativeTo: this.route})
+    setCurrent(i: number) {
+        this.currentIndex = i
+        this.navigate()
+    }
+
+    navigate() {
+        this.router.navigate([this.recipes[this.currentIndex].id], {relativeTo: this.route})
     }
 }
