@@ -1,1 +1,35 @@
-<h1>{{recipeStorage.activeRecipe.title}}</h1>
+<div *ngIf="recipeStorage.activeRecipe">
+  <div style="margin-top: 2rem" class="row">
+    <div class="col-lg-6 d-flex flex-column align-items-center">
+      <h2>{{ recipeStorage.activeRecipe.title }}</h2>
+      <h5>⏱ {{ recipeStorage.activeRecipe.readyInMinutes }} min</h5>
+      <img
+        class="p-1 d-block img-responsive border-black border-1 rounded-3"
+        [src]="recipeStorage.activeRecipe.image"
+        [alt]="recipeStorage.activeRecipe.title">
+      <h2>Zubereitung</h2>
+      <div
+        class="text-center"
+        *ngFor="let instruction of recipeStorage.activeRecipe.analyzedInstructions">
+        <div *ngFor="let step of instruction.steps">
+          <h5>{{step.number}}. Schritt</h5>
+          <p>{{step.step}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="p-1 col-lg-5 d-flex flex-column">
+      <h2>Zutaten</h2>
+      <ul class="list-group">
+        <li
+          class="list-group-item w-auto"
+          *ngFor="let ingredients of recipeStorage.activeRecipe.extendedIngredients">
+          <div class="d-flex justify-content-between">
+            <span>{{ingredients.name}}</span>
+            <span>{{ingredients.amount}} {{ingredients.unit}}</span>
+          </div>
+        </li>
+      </ul>
+      <button style="margin-top: 1rem">hinzufügen</button>
+    </div>
+  </div>
+</div>

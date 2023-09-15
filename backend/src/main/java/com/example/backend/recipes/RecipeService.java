@@ -1,8 +1,9 @@
 package com.example.backend.recipes;
 
-import com.example.backend.ingredients.Ingredient;
 import com.example.backend.ingredients.RequiredIngredient;
+import com.example.backend.recipes.models.AnalyzedInstruction;
 import com.example.backend.recipes.models.Recipe;
+import com.example.backend.recipes.models.Step;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,6 @@ public class RecipeService {
     }
 
     private Recipe convertDocumentToRecipe(Document document) {
-
         return Recipe.builder()
                 .id(document.getString("_id"))
                 .title(document.getString("title"))
@@ -47,7 +47,17 @@ public class RecipeService {
                                 .build())
                         .toList())
                 .summary(document.getString("summary"))
-                .build();
+                .analyzedInstructions(document.getList("analyzedInstructions", Document.class).stream()
+                        .map(analyzedInstruction -> AnalyzedInstruction.builder()
+                                .steps(analyzedInstruction.getList("steps", Document.class)
+                                        .stream()
+                                        .map(step -> Step.builder()
+                                                .number(step.getInteger("number"))
+                                                .step(step.getString("step"))
+                                                .build()
+                                        ).toList())
+                                .build()
+                        ).toList()).build();
     }
 
 }

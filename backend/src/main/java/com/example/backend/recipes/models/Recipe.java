@@ -14,5 +14,6 @@ public record Recipe(
         String summary,
         List<RequiredIngredient> extendedIngredients,
         String image,
-        int readyInMinutes) {
+        int readyInMinutes,
+        List<AnalyzedInstruction> analyzedInstructions) {
 }

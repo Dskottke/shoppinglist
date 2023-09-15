@@ -3,10 +3,10 @@ import {CommonModule} from '@angular/common';
 import {ActivatedRouteSnapshot, ResolveFn, Router, RouterModule, RouterStateSnapshot, Routes} from "@angular/router";
 import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
 import {RecipesComponent} from "./recipes/recipes.component";
-import {Recipe} from "./recipes/recipe.model";
 import {RecipeDetailComponent} from "./recipes/recipe-detail/recipe-detail.component";
 import {RecipeStorageService} from "./recipes/recipe-storage.service";
 import {RecipeInfoComponent} from "./recipes/random-recipes/recipe-info/recipe.info.component";
+import {Recipe} from "./recipes/models/recipe.model";
 
 
 const activatedRecipeResolver: ResolveFn<Recipe> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {

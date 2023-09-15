@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 
 import {ActivatedRoute, Router} from "@angular/router";
-import {Recipe} from "../../recipe.model";
+import {Recipe} from "../../models/recipe.model";
 
 @Component({
     selector: 'app-random-recipe-carousel',

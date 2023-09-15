@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RecipeStorageService} from "../recipe-storage.service";
 
 @Component({
@@ -12,5 +12,5 @@ export class RecipeDetailComponent {
   }
 
 
-
+  protected readonly RecipeStorageService = RecipeStorageService;
 }
