@@ -16,7 +16,9 @@ export class RandomRecipeListCarousel implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         const id = changes.recipes.currentValue[this.currentIndex].id
+      if(id) {
         this.router.navigate([id], {relativeTo: this.route})
+      }
     }
 
     setPrev() {

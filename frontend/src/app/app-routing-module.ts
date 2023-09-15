@@ -3,16 +3,16 @@ import {CommonModule} from '@angular/common';
 import {ActivatedRouteSnapshot, ResolveFn, Router, RouterModule, RouterStateSnapshot, Routes} from "@angular/router";
 import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
 import {RecipesComponent} from "./recipes/recipes.component";
-import {RecipeApiService} from "./recipes/recipe-api.service";
 import {Recipe} from "./recipes/recipe.model";
+import {RecipeComponent} from "./recipes/recipe/recipe.component";
 import {RecipeDetailComponent} from "./recipes/recipe-detail/recipe-detail.component";
+import {RecipeStorageService} from "./recipes/recipe-storage.service";
 
 
-
-const recipeDetailResolver: ResolveFn<Recipe> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+const activatedRecipeResolver: ResolveFn<Recipe> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const id = route.params['id']
-  const recipeToFind = inject(RecipeApiService).randomRecipe.find(recipe=> recipe.id === id)
-  if(recipeToFind) {
+  const recipeToFind = inject(RecipeStorageService).randomRecipe.find(recipe => recipe.id === id)
+  if (recipeToFind) {
     return recipeToFind
   }
   inject(Router).navigate(['recipes'])
@@ -23,9 +23,12 @@ export const routes: Routes = [
   {
     path: "recipes", component: RecipesComponent,
     children: [
-      {path: ":id", component: RecipeDetailComponent, resolve: {recipe: recipeDetailResolver}}
+      {path: ":id", component: RecipeComponent, resolve: {recipe: activatedRecipeResolver}},
     ]
-  }
+  },
+  {path: "recipes/:id/detail", component: RecipeDetailComponent}
+
+
 ]
 
 @NgModule({

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {Recipe} from "../recipe.model";
+import {RecipeStorageService} from "../recipe-storage.service";
 
 @Component({
   selector: 'app-recipe-detail',
@@ -8,20 +7,12 @@ import {Recipe} from "../recipe.model";
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  activeRecipe: Recipe
 
-  constructor(private route: ActivatedRoute) {
+  constructor(public recipeStorage : RecipeStorageService) {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe((data) => {
-      this.activeRecipe = data['recipe'];
-    })
   }
 
-  shortenSummaries(summary: string) {
-    const sentences = summary.split(". ");
-    sentences.pop();
-    return sentences.join(". ")
-  }
+
 }

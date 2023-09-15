@@ -1,0 +1,6 @@
+<div class="col-sm-8 flex m-4">
+  <h2>{{activeRecipe.title}}</h2>
+  <p [innerHTML]="shortenSummaries(activeRecipe.summary)"></p>
+<button (click)="activateRecipe()" >Zum Rezept</button>
+</div>
+

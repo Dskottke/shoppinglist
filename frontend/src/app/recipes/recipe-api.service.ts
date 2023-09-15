@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Recipe} from "./recipe.model";
+import {RecipeStorageService} from "./recipe-storage.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class RecipeApiService {
-    randomRecipe: Recipe[] = []
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private recipeStorage : RecipeStorageService) {
     }
 
     getRandomRecipes() {
         return this.http.get<Recipe[]>("api/recipes/random").subscribe({
             next: (response) => {
-                this.randomRecipe = response
+                this.recipeStorage.randomRecipe = response
             }
         })
     }

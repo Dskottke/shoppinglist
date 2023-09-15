@@ -11,6 +11,7 @@ import {AppRoutingModule} from "./app-routing-module";
 import { RecipesComponent } from './recipes/recipes.component';
 import { RandomRecipeListCarousel } from './recipes/random-recipe-carousel/random-recipe-list-carousel.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import {RecipeComponent} from "./recipes/recipe/recipe.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
     RecipesComponent,
     RandomRecipeListCarousel,
     RecipeDetailComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
