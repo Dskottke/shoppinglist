@@ -14,7 +14,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import {
   RandomRecipeListCarousel
 } from "./recipes/random-recipes/random-recipe-carousel/random-recipe-list-carousel.component";
-import {RecipeComponent} from "./recipes/random-recipes/recipe/recipe.component";
+import {RecipeInfoComponent} from "./recipes/random-recipes/recipe-info/recipe.info.component";
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import {RecipeComponent} from "./recipes/random-recipes/recipe/recipe.component"
     RecipesComponent,
     RandomRecipeListCarousel,
     RecipeDetailComponent,
-    RecipeComponent
+    RecipeInfoComponent
   ],
   imports: [
     BrowserModule,

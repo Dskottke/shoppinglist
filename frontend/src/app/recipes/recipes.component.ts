@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {RecipeApiService} from "./recipe-api.service";
-import {ActivatedRoute} from "@angular/router";
 import {RecipeStorageService} from "./recipe-storage.service";
 
 @Component({

@@ -6,7 +6,7 @@ import {RecipesComponent} from "./recipes/recipes.component";
 import {Recipe} from "./recipes/recipe.model";
 import {RecipeDetailComponent} from "./recipes/recipe-detail/recipe-detail.component";
 import {RecipeStorageService} from "./recipes/recipe-storage.service";
-import {RecipeComponent} from "./recipes/random-recipes/recipe/recipe.component";
+import {RecipeInfoComponent} from "./recipes/random-recipes/recipe-info/recipe.info.component";
 
 
 const activatedRecipeResolver: ResolveFn<Recipe> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
@@ -23,7 +23,7 @@ export const routes: Routes = [
   {
     path: "recipes", component: RecipesComponent,
     children: [
-      {path: ":id", component: RecipeComponent, resolve: {recipe: activatedRecipeResolver}},
+      {path: ":id", component: RecipeInfoComponent, resolve: {recipe: activatedRecipeResolver}},
     ]
   },
   {path: "recipes/:id/detail", component: RecipeDetailComponent}

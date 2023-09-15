@@ -7,10 +7,10 @@ import {RecipeStorageService} from "../../recipe-storage.service";
 
 @Component({
   selector: 'app-recipe-detail',
-  templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css']
+  templateUrl: './recipe.info.component.html',
+  styleUrls: ['./recipe.info.component.css']
 })
-export class RecipeComponent implements OnInit {
+export class RecipeInfoComponent implements OnInit {
   activeRecipe: Recipe
 
   constructor(

@@ -7,5 +7,4 @@ import {Recipe} from "./recipe.model";
 export class RecipeStorageService {
   randomRecipe: Recipe[] = []
   activeRecipe : Recipe
-  constructor() { }
 }
