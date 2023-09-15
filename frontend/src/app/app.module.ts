@@ -9,9 +9,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing-module";
 import { RecipesComponent } from './recipes/recipes.component';
-import { RandomRecipeListCarousel } from './recipes/random-recipe-carousel/random-recipe-list-carousel.component';
+
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import {RecipeComponent} from "./recipes/recipe/recipe.component";
+import {
+  RandomRecipeListCarousel
+} from "./recipes/random-recipes/random-recipe-carousel/random-recipe-list-carousel.component";
+import {RecipeComponent} from "./recipes/random-recipes/recipe/recipe.component";
+
 
 @NgModule({
   declarations: [

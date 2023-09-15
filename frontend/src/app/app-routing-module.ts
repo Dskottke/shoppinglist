@@ -4,9 +4,9 @@ import {ActivatedRouteSnapshot, ResolveFn, Router, RouterModule, RouterStateSnap
 import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
 import {RecipesComponent} from "./recipes/recipes.component";
 import {Recipe} from "./recipes/recipe.model";
-import {RecipeComponent} from "./recipes/recipe/recipe.component";
 import {RecipeDetailComponent} from "./recipes/recipe-detail/recipe-detail.component";
 import {RecipeStorageService} from "./recipes/recipe-storage.service";
+import {RecipeComponent} from "./recipes/random-recipes/recipe/recipe.component";
 
 
 const activatedRecipeResolver: ResolveFn<Recipe> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {

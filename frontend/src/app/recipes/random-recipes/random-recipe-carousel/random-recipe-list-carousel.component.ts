@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {Recipe} from "../recipe.model";
+
 import {ActivatedRoute, Router} from "@angular/router";
+import {Recipe} from "../../recipe.model";
 
 @Component({
     selector: 'app-random-recipe-carousel',
@@ -14,12 +15,15 @@ export class RandomRecipeListCarousel implements OnChanges {
     constructor(private router: Router, private route: ActivatedRoute) {
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        const id = changes.recipes.currentValue[this.currentIndex].id
-      if(id) {
-        this.router.navigate([id], {relativeTo: this.route})
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.recipes?.currentValue && changes.recipes.currentValue.length > 0) {
+      const id = changes.recipes.currentValue[this.currentIndex]?.id;
+      if (id) {
+        this.router.navigate([id], { relativeTo: this.route });
       }
     }
+  }
+
 
     setPrev() {
         if (this.currentIndex !== 0) {
