@@ -1,6 +1,7 @@
 package com.example.backend.recipes;
 
 import com.example.backend.recipes.models.Recipe;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @GetMapping("/random")
-    public List<Recipe> getRandomRecipes() {
+    public List<Recipe> getRandomRecipes() throws JsonProcessingException {
         return recipeService.getRandomRecipes();
     }
 }

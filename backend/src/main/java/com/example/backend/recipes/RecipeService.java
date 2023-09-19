@@ -4,6 +4,8 @@ import com.example.backend.ingredients.RequiredIngredient;
 import com.example.backend.recipes.models.AnalyzedInstruction;
 import com.example.backend.recipes.models.Recipe;
 import com.example.backend.recipes.models.Step;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import lombok.RequiredArgsConstructor;
@@ -19,45 +21,19 @@ import java.util.List;
 public class RecipeService {
 
     private final MongoTemplate mongoTemplate;
+    private final ObjectMapper objectMapper;
 
-    public List<Recipe> getRandomRecipes() {
+    public List<Recipe> getRandomRecipes() throws JsonProcessingException {
         MongoCollection<Document> recipeCollection = mongoTemplate.getCollection("recipe");
         List<Document> pipeline = new ArrayList<>();
         pipeline.add(new Document("$sample", new Document("size", 10)));
         AggregateIterable<Document> results = recipeCollection.aggregate(pipeline);
         List<Recipe> randomRecipes = new ArrayList<>();
         for (Document document : results) {
-            Recipe recipe = convertDocumentToRecipe(document);
+            String randomRecipe = objectMapper.writeValueAsString(document).replace("_id", "id");
+            Recipe recipe = objectMapper.readValue(randomRecipe, Recipe.class);
             randomRecipes.add(recipe);
         }
         return randomRecipes;
     }
-
-    private Recipe convertDocumentToRecipe(Document document) {
-        return Recipe.builder()
-                .id(document.getString("_id"))
-                .title(document.getString("title"))
-                .image(document.getString("image"))
-                .readyInMinutes(document.getInteger("readyInMinutes"))
-                .extendedIngredients(document.getList("extendedIngredients", Document.class).stream()
-                        .map(extendedIngredient -> RequiredIngredient.builder()
-                                .name(extendedIngredient.getString("name"))
-                                .unit(extendedIngredient.getString("unit"))
-                                .amount(extendedIngredient.getInteger("amount"))
-                                .build())
-                        .toList())
-                .summary(document.getString("summary"))
-                .analyzedInstructions(document.getList("analyzedInstructions", Document.class).stream()
-                        .map(analyzedInstruction -> AnalyzedInstruction.builder()
-                                .steps(analyzedInstruction.getList("steps", Document.class)
-                                        .stream()
-                                        .map(step -> Step.builder()
-                                                .number(step.getInteger("number"))
-                                                .step(step.getString("step"))
-                                                .build()
-                                        ).toList())
-                                .build()
-                        ).toList()).build();
-    }
-
 }
